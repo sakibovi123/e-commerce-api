@@ -23,10 +23,10 @@ class Product(models.Model):
         return self.title
 
 
-class Favorire(models.Model):
+class Favorite(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.Case)
-    isFavorit = models.BooleanField(default=False)
+    isFavorite = models.BooleanField(default=False)
 
     def __str__(self):
         return f"productID ={self.product.id}user={self.user.username}|ISFavorite={self.isFavorit}"
@@ -35,7 +35,7 @@ class Favorire(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total = models.PositiveIntegerField()
-    isComplit = models.BooleanField(default=False)
+    isComplete = models.BooleanField(default=False)
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):

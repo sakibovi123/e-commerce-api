@@ -25,7 +25,7 @@ class ProductView(APIView):
         return Response(serializers.data)
 
 
-class FavoritView(APIView):
+class FavoriteView(APIView):
     permission_classes = [IsAuthenticated, ]
     authentication_classes = [TokenAuthentication, ]
 
@@ -36,16 +36,16 @@ class FavoritView(APIView):
             product_obj = Product.objects.get(id=data)
             # print(data)
             user = request.user
-            single_favorit_product = Favorire.objects.filter(
+            single_favorite_product = Favorite.objects.filter(
                 user=user).filter(product=product_obj).first()
-            if single_favorit_product:
-                print("single_favorit_product")
-                ccc = single_favorit_product.isFavorit
-                single_favorit_product.isFavorit = not ccc
-                single_favorit_product.save()
+            if single_favorite_product:
+                print("single_favorite_product")
+                ccc = single_favorite_product.isFavorite
+                single_favorite_product.isFavorite = not ccc
+                single_favorite_product.save()
             else:
-                Favorire.objects.create(
-                    product=product_obj, user=user, isFavorit=True)
+                Favorite.objects.create(
+                    product=product_obj, user=user, isFavorite=True)
             response_msg = {'error': False}
         except:
             response_msg = {'error': True}
@@ -157,7 +157,7 @@ class AddToCart(APIView):
         return Response(response_mesage)
 
 
-class DelateCarProduct(APIView):
+class DeleteCarProduct(APIView):
     authentication_classes = [TokenAuthentication, ]
     permission_classes = [IsAuthenticated, ]
 
@@ -176,7 +176,7 @@ class DelateCarProduct(APIView):
         return Response(response_msg)
 
 
-class DelateCart(APIView):
+class DeleteCart(APIView):
     permission_classes = [IsAuthenticated, ]
     authentication_classes = [TokenAuthentication, ]
 
